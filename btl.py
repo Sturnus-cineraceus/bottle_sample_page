@@ -9,6 +9,10 @@ test_ary = []
 def toppage():
     return template('index')
 
+@route('/hoge')
+def hogepage():
+    return template('htmlapi')
+
 #jsファイルなど静的ファイルを表示させる
 @route('/static/<filename:path>')
 def static(filename):

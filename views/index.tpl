@@ -25,13 +25,47 @@
       minLength: 1
     });
 
-      });
+    /* オートコンプリート機能を開始させる */
+    $("#autc2").autocomplete({
+      source: function( req,res){
+        $.ajax({
+            //特定のURLに今テキストエリアに入力している文字をくっつけてアクセスする
+            url: "/hoge",
+            dataType: "html",
+            success: function( data ) {
+
+                var ajrex = [];
+                $div =  $(data).filter("#damedame");
+                console.log($div);
+                $("> p" , $div).each(function(){
+                  var txt = $(this).text();
+                  if(txt.indexOf(req.term) != -1) {
+                    ajrex.push(txt);
+                  }
+                });
+
+                res(ajrex);
+            }
+        });
+    },
+    autoFocus: true,
+    delay: 500,
+    minLength: 1
+  });
+
+
+    });
     </script>
 </head>
 <body>
   <div>
     オートコンプートテスト
     <input id="autc">
+  </div>
+
+  <div>
+    オートコンプートテスト2
+    <input id="autc2">
   </div>
 
 </body>
